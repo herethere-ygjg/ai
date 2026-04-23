@@ -20,3 +20,11 @@ class RedisManager:
     def close(self) -> None:
         self.client.close()
         print("[Redis] Disconnected")
+
+    def set_value(self, key: str, value: str, ttl: int | None = None):
+        """Redis Key, Value 업데이트 함수"""
+        self.client.set(key, value, ex=ttl)
+
+    def get_value(self, key: str):
+        """Redis Key를 기반으로 값 조회 함수"""
+        return self.client.get(key)
